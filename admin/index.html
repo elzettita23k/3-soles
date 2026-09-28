@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>3 Soles | Admin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f3ee;
+      color: #171717;
+      padding-bottom: 50px;
+    }
+
+    header {
+      background: #171717;
+      color: white;
+      padding: 22px 20px;
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .admin-label {
+      font-size: 12px;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .top {
+      margin-bottom: 30px;
+    }
+
+    .top h1 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .top p {
+      color: #777;
+    }
+
+    .products {
+      display: grid;
+      gap: 18px;
+    }
+
+    .product {
+      background: white;
+      border: 1px solid #e2dfd8;
+      border-radius: 18px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 110px 1fr auto;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .product img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 14px;
+      background: #eee;
+    }
+
+    .product-info h2 {
+      font-size: 21px;
+      margin-bottom: 5px;
+    }
+
+    .product-info p {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .status {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 9px;
+      border-radius: 50px;
+      background: #e9f5e9;
+      color: #267326;
+    }
+
+    .empty {
+      background: white;
+      border: 1px solid #e2dfd8;
+      border-radius: 18px;
+      padding: 40px;
+      text-align: center;
+      color: #777;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 50px;
+      color: #777;
+    }
+
+    @media (max-width: 650px) {
+
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .product {
+        grid-template-columns: 80px 1fr;
+      }
+
+      .product img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .status {
+        grid-column: 2;
+        width: fit-content;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">3 Soles</div>
+      <div class="admin-label">Panel de administración</div>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="top">
+      <h1>Productos</h1>
+      <p>Administrá los productos que aparecen en tu catálogo.</p>
+    </div>
+
+    <div id="products" class="products">
+
+      <div class="loading">
+        Cargando productos...
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    async function loadProducts() {
+
+      const container = document.getElementById("products");
+
+      try {
+
+        const response = await fetch("../data/products.json");
+
+        if (!response.ok) {
+          throw new Error("No se pudo cargar el catálogo.");
+        }
+
+        const products = await response.json();
+
+        container.innerHTML = "";
+
+        if (!products.length) {
+
+          container.innerHTML = `
+            <div class="empty">
+              No hay productos cargados.
+            </div>
+          `;
+
+          return;
+        }
+
+        products.forEach(product => {
+
+          const item = document.createElement("div");
+
+          item.className = "product";
+
+          item.innerHTML = `
+
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+            >
+
+            <div class="product-info">
+
+              <h2>
+                ${product.emoji || ""} ${product.name}
+              </h2>
+
+              <p>
+                ${product.presentation || "Sin presentación"}
+              </p>
+
+              <div class="price">
+                $${product.price}
+              </div>
+
+            </div>
+
+            <div>
+              <span class="status">
+                ACTIVO
+              </span>
+            </div>
+
+          `;
+
+          container.appendChild(item);
+
+        });
+
+      } catch (error) {
+
+        container.innerHTML = `
+          <div class="empty">
+            No se pudieron cargar los productos.
+          </div>
+        `;
+
+        console.error(error);
+
+      }
+
+    }
+
+    loadProducts();
+
+  </script>
+
+</body>
+</html>

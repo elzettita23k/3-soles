@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>3 Soles | Hecho con amor</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f8f6f1;
+      color: #171717;
+    }
+
+    /* NAVBAR */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248, 246, 241, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e8e4dc;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #171717;
+      font-size: 14px;
+      margin-left: 18px;
+    }
+
+    /* HERO */
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      min-height: 75vh;
+      padding: 80px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero span {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 13vw, 110px);
+      line-height: .9;
+      letter-spacing: -6px;
+      margin-bottom: 25px;
+    }
+
+    .hero p {
+      max-width: 550px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #666;
+      margin-bottom: 35px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #171717;
+      color: white;
+      text-decoration: none;
+      padding: 15px 25px;
+      border-radius: 100px;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      opacity: .9;
+    }
+
+    /* SECTIONS */
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 22px;
+    }
+
+    .section-title {
+      margin-bottom: 40px;
+    }
+
+    .section-title span {
+      color: #999;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(35px, 7vw, 60px);
+      letter-spacing: -3px;
+      margin-top: 8px;
+    }
+
+    /* PRODUCTS */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .product {
+      background: white;
+      border: 1px solid #e8e4dc;
+      border-radius: 22px;
+      overflow: hidden;
+      transition: .25s;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / .75;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-info {
+      padding: 22px;
+    }
+
+    .product-info h3 {
+      font-size: 24px;
+      margin-bottom: 7px;
+    }
+
+    .presentation {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .price {
+      font-size: 23px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .product-button {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      background: #171717;
+      color: white;
+      padding: 13px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    /* HOW TO ORDER */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid #e8e4dc;
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .step-number {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 30px;
+    }
+
+    .step h3 {
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: #777;
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid #e8e4dc;
+      text-align: center;
+      padding: 40px 20px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+
+      nav {
+        padding: 16px;
+      }
+
+      nav a {
+        font-size: 13px;
+        margin-left: 10px;
+      }
+
+      .hero {
+        min-height: 70vh;
+        padding: 70px 20px;
+      }
+
+      .hero h1 {
+        letter-spacing: -4px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      section {
+        padding: 65px 18px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <header>
+    <nav>
+      <div class="logo">3 Soles</div>
+
+      <div>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#como-pedir">Cómo pedir</a>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero">
+
+      <span>Hecho con amor</span>
+
+      <h1>3 Soles</h1>
+
+      <p>
+        Cositas ricas para compartir, disfrutar
+        y hacer más dulce cualquier momento.
+      </p>
+
+      <a
+        class="button"
+        href="https://wa.me/59894855039?text=Hola%203%20Soles!%20Quiero%20hacer%20un%20pedido."
+        target="_blank"
+      >
+        Pedir por WhatsApp
+      </a>
+
+    </section>
+
+
+    <!-- CATALOGO -->
+
+    <section id="catalogo">
+
+      <div class="section-title">
+        <span>Catálogo</span>
+        <h2>Elegí tu favorito.</h2>
+      </div>
+
+
+      <div class="products">
+
+
+        <!-- PIZZETAS -->
+
+        <article class="product">
+
+          <img
+            class="product-image"
+            src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1000&q=80"
+            alt="Pizzetas"
+          >
+
+          <div class="product-info">
+
+            <h3>🍕 Pizzetas</h3>
+
+            <div class="presentation">
+              Bandeja de 10 unidades
+            </div>
+
+            <div class="price">
+              $70
+            </div>
+
+            <a
+              class="product-button"
+              href="https://wa.me/59894855039?text=Hola%203%20Soles!%20Quiero%20pedir%20Pizzetas."
+              target="_blank"
+            >
+              Pedir por WhatsApp
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- ALFAJORES -->
+
+        <article class="product">
+
+          <img
+            class="product-image"
+            src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1000&q=80"
+            alt="Alfajores"
+          >
+
+          <div class="product-info">
+
+            <h3>🍪 Alfajores</h3>
+
+            <div class="presentation">
+              Bandeja de 3 unidades
+            </div>
+
+            <div class="price">
+              $100
+            </div>
+
+            <a
+              class="product-button"
+              href="https://wa.me/59894855039?text=Hola%203%20Soles!%20Quiero%20pedir%20Alfajores."
+              target="_blank"
+            >
+              Pedir por WhatsApp
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- PIONONO -->
+
+        <article class="product">
+
+          <img
+            class="product-image"
+            src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=80"
+            alt="Pionono"
+          >
+
+          <div class="product-info">
+
+            <h3>🍰 Pionono</h3>
+
+            <div class="presentation">
+              Por unidad
+            </div>
+
+            <div class="price">
+              $280
+            </div>
+
+            <a
+              class="product-button"
+              href="https://wa.me/59894855039?text=Hola%203%20Soles!%20Quiero%20pedir%20Pionono."
+              target="_blank"
+            >
+              Pedir por WhatsApp
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- MASITAS -->
+
+        <article class="product">
+
+          <img
+            class="product-image"
+            src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1000&q=80"
+            alt="Masitas"
+          >
+
+          <div class="product-info">
+
+            <h3>🍪 Masitas</h3>
+
+            <div class="presentation">
+              Bandeja de masitas
+            </div>
+
+            <div class="price">
+              $150
+            </div>
+
+            <a
+              class="product-button"
+              href="https://wa.me/59894855039?text=Hola%203%20Soles!%20Quiero%20pedir%20Masitas."
+              target="_blank"
+            >
+              Pedir por WhatsApp
+            </a>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- COMO PEDIR -->
+
+    <section id="como-pedir">
+
+      <div class="section-title">
+        <span>Simple y rápido</span>
+        <h2>Cómo pedir.</h2>
+      </div>
+
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="step-number">
+            01
+          </div>
+
+          <h3>Elegís</h3>
+
+          <p>
+            Mirá nuestro catálogo y elegí
+            lo que más te guste.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">
+            02
+          </div>
+
+          <h3>Escribís</h3>
+
+          <p>
+            Tocá el botón de WhatsApp
+            y mandanos tu pedido.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">
+            03
+          </div>
+
+          <h3>Coordinamos</h3>
+
+          <p>
+            Coordinamos directamente por
+            WhatsApp la cantidad y los detalles.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    © 2026 3 Soles · Hecho con amor
+
+  </footer>
+
+</body>
+</html>
